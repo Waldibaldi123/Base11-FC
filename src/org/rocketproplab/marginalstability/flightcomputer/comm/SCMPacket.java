@@ -81,14 +81,23 @@ public class SCMPacket {
     return calculatedChecksum;
   }
   
+  /**
+   * @return the ID
+   */
   public String getID() {
     return this.id;
   }
   
+  /**
+   * @return the data
+   */
   public String getData() {
     return this.data;
   }
   
+  /**
+   * @return true if valid
+   */
   public boolean isValid() {
     return this.isValid;
   }

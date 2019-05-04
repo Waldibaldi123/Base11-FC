@@ -22,6 +22,12 @@ public class Vector3 {
     this.y = y;
     this.z = z;
   }
+  
+  public Vector3(Vector3 vector) {
+    this.x = vector.getX();
+    this.y = vector.getY();
+    this.z = vector.getZ();
+  }
 
   /**
    * @return the x component
@@ -44,5 +50,11 @@ public class Vector3 {
     return z;
   }
   
+  /**
+   * @return the length of the vector
+   */
+  public double getLength() {
+    return Math.sqrt((getX() * getX()) + (getY() * getY()) + (getZ() * getZ()));
+  }
   
 }
