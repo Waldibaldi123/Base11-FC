@@ -2,15 +2,29 @@ package org.rocketproplab.marginalstability.flightcomputer.tracking;
 
 import org.rocketproplab.marginalstability.flightcomputer.comm.GPSPacket;
 import org.rocketproplab.marginalstability.flightcomputer.events.VelocityListener;
+import org.rocketproplab.marginalstability.flightcomputer.math.InterpolatingVector3;
 import org.rocketproplab.marginalstability.flightcomputer.math.Vector3;
 
-public class VelocityCalculator implements VelocityListener {
+public class VelocityCalculator implements VelocityListener, InterpolatingVector3 {
+  
+  private static Vector3 prevVelocity;
+  private static Vector3 currVeloctiy;
+  
+  public VelocityCalculator() {
+    //default constructor
+  }
 
   @Override
   public void onVelocityUpdate(Vector3 velocity, double time) {
     // TODO Auto-generated method stub
 
   }
+  
+  @Override
+  public Vector3 getAt(double time) {
+    
+    return null;
+  } 
 
   /**
    * Takes last two GPSPackets and calculates 3 dimensional velocity-vector 
@@ -18,7 +32,7 @@ public class VelocityCalculator implements VelocityListener {
    * @param curGPSPacket the current packet
    * @return Vector3 Velocity Vector
    */
-  public static Vector3 getVelocityVector(GPSPacket prevGPSPacket,
+  public Vector3 getVelocityVector(GPSPacket prevGPSPacket,
       GPSPacket curGPSPacket) {
     double deltaLat = curGPSPacket.getLatitude() - prevGPSPacket.getLatitude();
     double deltaLon  = curGPSPacket.getLongitude() - prevGPSPacket.getLongitude();
@@ -39,9 +53,14 @@ public class VelocityCalculator implements VelocityListener {
    * @param curGPSPacket
    * @return speed 
    */
-  public static double getSpeed(GPSPacket prevGPSPacket, GPSPacket curGPSPacket) {
+  public double getSpeed(GPSPacket prevGPSPacket, GPSPacket curGPSPacket) {
     Vector3 velocityVector = getVelocityVector(prevGPSPacket, curGPSPacket);
     return velocityVector.getLength();
-  } 
-
+  }
+  
+  public double getAcceleration(GPSPacket prevGPSPacket, GPSPacket curGPSPacket) {
+    Vector3 velocityVector = getVelocityVector(prevGPSPacket, curGPSPacket);
+    return 0.0; //TODO
+  }
+  
 }

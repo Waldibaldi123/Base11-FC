@@ -28,4 +28,10 @@ public class Settings {
    * Conversion constant for how many milliseconds are in a second
    */
   public static double MS_PER_SECOND = 1000; // ms/s
+  
+  //Valve states
+  /**
+   * Initial state of valves when subsystem is first initialized
+   */
+  public static String INITIAL_VALVE_STATE = "00000";
 }
